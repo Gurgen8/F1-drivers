@@ -18,10 +18,10 @@ let PER_PAGE = 15;
 export const DriversListScreen = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector(state => state.GetDriversList.data);
-  const offset = useRef<number>(data?.length || 0);
+  const offset = useRef<number>(data?.data?.length || 0);
 
   useEffect(() => {
-    if (data === null) {
+    if (!data?.data.length) {
       dispatch(getDriversListThunk(0))
         .unwrap()
         .then(() => {
@@ -32,7 +32,7 @@ export const DriversListScreen = () => {
   }, [dispatch]);
 
   const fetchData = () => {
-    if (data === null) {
+    if (!data.data.length || Number(data?.total) <= data?.data?.length) {
       return;
     }
 
@@ -55,7 +55,7 @@ export const DriversListScreen = () => {
         initialNumToRender={8}
         onEndReached={fetchData}
         renderItem={renderItem}
-        data={data}
+        data={data?.data}
         style={styles.list}
         keyExtractor={(item, index) => item['@_driverId'] + index}
       />

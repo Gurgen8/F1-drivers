@@ -20,7 +20,6 @@ const GetDriverInfoSlice = createSlice({
         (state, action: PayloadAction<TDriverListItem>) => {
           state.status = 'idle';
           state.error = null;
-          console.log(action.payload);
           state.data = action.payload;
         },
       )

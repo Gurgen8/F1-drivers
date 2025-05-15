@@ -8,7 +8,7 @@ export type TParsedXmlDriverInfoData = {
   MRData: {DriverTable: {Driver: TDriverListItem}};
 };
 export type TParsedXmlDriverListData = {
-  MRData: {DriverTable: {Driver: TDriverListItem[]}};
+  MRData: {DriverTable: {Driver: TDriverListItem[]}; '@_total': number};
 };
 
 export type TDriverListItem = {

@@ -13,8 +13,10 @@ export const getDriversListThunk = createAsyncThunk(
       const parsedResponseData = parserXML.parse(
         response.data,
       ) as TParsedXmlDriverListData;
-
-      return parsedResponseData.MRData.DriverTable.Driver;
+      return {
+        data: parsedResponseData.MRData.DriverTable.Driver,
+        total: parsedResponseData.MRData?.['@_total'],
+      };
     } catch (err) {
       if (axios.isAxiosError(err)) {
         const error: AxiosError<{error: {message: string}}> = err;
